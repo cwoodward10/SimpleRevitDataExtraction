@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Command Cottage.DataExtraction</Text>
+    <Description>Some description for Cottage.DataExtraction</Description>
+    <Assembly>Cottage.DataExtraction.dll</Assembly>
+    <FullClassName>Cottage.DataExtraction.Command</FullClassName>
+    <ClientId>a4a584f6-1d24-4864-baec-99f72b4d03c4</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>Application Cottage.DataExtraction</Name>
+    <Assembly>Cottage.DataExtraction.dll</Assembly>
+    <FullClassName>Cottage.DataExtraction.App</FullClassName>
+    <ClientId>0bdaf6da-42bf-4318-9bea-fc009ab008a3</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>

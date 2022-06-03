@@ -100,5 +100,12 @@ dist
 # DynamoDB Local files
 .dynamodb/
 
+# .Net
+Revit/Cottage.DataExtraction/bin
+Revit/Cottage.DataExtraction/obj
+
 # TernJS port file
 .tern-port
+Revit/.vs/Cottage.DataExtraction/FileContentIndex/b8e6637f-97a5-4ef7-8b88-8e21356ab784.vsidx
+Revit/.vs/Cottage.DataExtraction/FileContentIndex/read.lock
+Revit/.vs/Cottage.DataExtraction/v17/.suo
