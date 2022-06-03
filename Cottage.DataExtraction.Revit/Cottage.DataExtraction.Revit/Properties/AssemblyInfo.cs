@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Cottage.DataExtraction")]
-[assembly: AssemblyDescription("Revit Add-In Description for Cottage.DataExtraction")]
+[assembly: AssemblyTitle("Cottage.DataExtraction.Revit")]
+[assembly: AssemblyDescription("Revit Add-In Description for Cottage.DataExtraction.Revit")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Autodesk Inc.")]
-[assembly: AssemblyProduct("Cottage.DataExtraction Revit C# .NET Add-In")]
+[assembly: AssemblyProduct("Cottage.DataExtraction.Revit Revit C# .NET Add-In")]
 [assembly: AssemblyCopyright("Copyright (C) 2020 by Jeremy Tammik, Autodesk Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

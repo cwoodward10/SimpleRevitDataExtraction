@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace Cottage.DataExtraction
+namespace Cottage.DataExtraction.Revit
 {
     internal class App : IExternalApplication
     {

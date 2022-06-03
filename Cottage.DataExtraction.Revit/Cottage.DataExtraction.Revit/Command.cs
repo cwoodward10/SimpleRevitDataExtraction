@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 #endregion
 
-namespace Cottage.DataExtraction
+namespace Cottage.DataExtraction.Revit
 {
     [Transaction(TransactionMode.Manual)]
     public class Command : IExternalCommand

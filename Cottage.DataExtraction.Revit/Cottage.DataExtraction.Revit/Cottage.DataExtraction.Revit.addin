@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Command Cottage.DataExtraction.Revit</Text>
+    <Description>Some description for Cottage.DataExtraction.Revit</Description>
+    <Assembly>Cottage.DataExtraction.Revit.dll</Assembly>
+    <FullClassName>Cottage.DataExtraction.Revit.Command</FullClassName>
+    <ClientId>8b642a57-abd0-431a-9d0d-228532f044b0</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>Application Cottage.DataExtraction.Revit</Name>
+    <Assembly>Cottage.DataExtraction.Revit.dll</Assembly>
+    <FullClassName>Cottage.DataExtraction.Revit.App</FullClassName>
+    <ClientId>4ad7a225-15a3-47ce-8223-11e0b3f80a36</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>
