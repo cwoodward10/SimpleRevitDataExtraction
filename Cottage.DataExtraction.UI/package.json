@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/chart.js": "^2.9.37",
+    "chart.js": "^3.8.0",
     "vue": "^3.2.25"
   },
   "devDependencies": {

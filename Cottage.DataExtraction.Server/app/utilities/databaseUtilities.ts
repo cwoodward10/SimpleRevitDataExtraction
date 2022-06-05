@@ -11,8 +11,8 @@ export async function GetDataFromDatabase() {
     await client.connect()
 
     const wallsRaw = await client.query('SELECT * from walls');
-    const floorsRaw = await client.query('SELECT * from walls');
-    const plumbingFixturesRaw = await client.query('SELECT * from walls');
+    const floorsRaw = await client.query('SELECT * from floors');
+    const plumbingFixturesRaw = await client.query('SELECT * from plumbingfixtures');
 
     await client.end()
 
