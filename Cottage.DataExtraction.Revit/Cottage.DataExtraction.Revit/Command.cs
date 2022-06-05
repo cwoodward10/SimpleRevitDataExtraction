@@ -1,12 +1,18 @@
 #region Namespaces
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Diagnostics;
+
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+
+using Cottage.DataExtraction.Revit.ModelQuery;
+using Cottage.DataExtraction.Revit.DatabaseInterop.Models;
 
 #endregion
 
@@ -20,39 +26,37 @@ namespace Cottage.DataExtraction.Revit
           ref string message,
           ElementSet elements)
         {
+            // basic revit document information
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
-            // Access current selection
-
-            Selection sel = uidoc.Selection;
-
-            // Retrieve elements from database
-
-            FilteredElementCollector col
-              = new FilteredElementCollector(doc)
-                .WhereElementIsNotElementType()
-                .OfCategory(BuiltInCategory.INVALID)
-                .OfClass(typeof(Wall));
-
-            // Filtered element collector is iterable
-
-            foreach (Element e in col)
+            try
             {
-                Debug.Print(e.Name);
+                // get information from Revit
+                List<Wall> walls = ModelQueryUtilities.GetModelWalls(doc).ToList();
+                List<Floor> floors = ModelQueryUtilities.GetModelFloors(doc).ToList();
+                List<FamilyInstance> plumbingFixtures = ModelQueryUtilities.GetModelPlumbingFixtures(doc).ToList();
+
+                // convert to database friendly info & send to postgresql
+                DatabaseModel databaseModel = DatabaseInterop.DatabaseUtilities.CreateDatabaseModelFromRevitElements(doc, walls, floors, plumbingFixtures);
+                DatabaseInterop.DatabaseUtilities.TransmitDatabaseModel(databaseModel);
+
+                TaskDialog successDialog = new TaskDialog("Success!");
+                successDialog.MainContent = "Revit Data has been successfully stored in the Database.";
+                successDialog.Show();
+
+                return Result.Succeeded;
             }
-
-            // Modify document within a transaction
-
-            using (Transaction tx = new Transaction(doc))
+            catch (Exception e)
             {
-                tx.Start("Transaction Name");
-                tx.Commit();
-            }
+                TaskDialog errorDialog = new TaskDialog("Error Extracting Data");
+                errorDialog.MainContent = e.Message;
+                errorDialog.Show();
 
-            return Result.Succeeded;
+                return Result.Failed;
+            }
         }
     }
 }
