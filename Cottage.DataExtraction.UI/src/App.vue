@@ -53,8 +53,8 @@ export default defineComponent({
     </header>
 
     <div class="grid grid-cols-3 gap-4">
-      <DataViewer :title="'Walls'" :inputData="walls" :stepSize="stepSize" />
-      <DataViewer :title="'Floors'" :inputData="floors" :stepSize="stepSize" />
+      <DataViewer :title="'Walls'" :inputData="walls" :stepSize="stepSize" :units="'ft.'" />
+      <DataViewer :title="'Floors'" :inputData="floors" :stepSize="stepSize" :units="'sq. ft.'" />
       <DataViewer :title="'Plumbing Fixtures'" :inputData="plumbingFixtures" :stepSize="stepSize" />
     </div>
 
