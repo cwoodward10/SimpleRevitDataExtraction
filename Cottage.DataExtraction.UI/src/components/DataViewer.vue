@@ -46,7 +46,7 @@ export default defineComponent({
                 const hueSteps = (360 / steps) > 100 ? 100 : (360 / steps);
                 
                 const hue = hueSteps * Math.ceil(currentIndex / adjustedStepSize);
-                const lightness = 25 + ((65 /adjustedStepSize) * ((currentIndex % adjustedStepSize) + 1)); // we want this to be between 20 and 90
+                const lightness = 25 + ((55 /adjustedStepSize) * ((currentIndex % adjustedStepSize) + 1)); // we want this to be between 20 and 80
 
                 return `hsl(${hue}deg, 100%, ${lightness}%)`
             })
