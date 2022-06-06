@@ -38,14 +38,15 @@ export default defineComponent({
         },
         chartColors: function() {
             const safeLength = this.inputData.length > 0 ? this.inputData.length : this.stepSize;
-            const steps =  safeLength / this.stepSize;
+            const adjustedStepSize = this.stepSize > this.inputData.length ? this.inputData.length : this.stepSize;
+            const steps =  safeLength / adjustedStepSize;
 
             return this.inputData.map((d: ElementModel, i: number) => {
                 const currentIndex = i + 1;
                 const hueSteps = (360 / steps) > 100 ? 100 : (360 / steps);
                 
-                const hue = hueSteps * Math.ceil(currentIndex / this.stepSize);
-                const lightness = 10 + ((80 /this.stepSize) * ((currentIndex % this.stepSize) + 1)); // we want this to be between 10 and 90
+                const hue = hueSteps * Math.ceil(currentIndex / adjustedStepSize);
+                const lightness = 25 + ((65 /adjustedStepSize) * ((currentIndex % adjustedStepSize) + 1)); // we want this to be between 20 and 90
 
                 return `hsl(${hue}deg, 100%, ${lightness}%)`
             })
