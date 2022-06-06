@@ -7,7 +7,13 @@ export async function GetDataFromDatabase() {
         password: dbConfig.PASSWORD,
         host: dbConfig.HOST,
         database: dbConfig.DATABASE,
+        idle_in_transaction_session_timeout: 10_000,
     })
+
+    client.on('error', err => {
+        client.end();
+    })
+
     await client.connect()
 
     const wallsRaw = await client.query('SELECT * from walls');

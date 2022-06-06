@@ -10,40 +10,68 @@ export default defineComponent({
             type: String,
             required: true,
         },
-        data: {
+        inputData: {
             type: Object as PropType<ElementModel[]>,
             required: true
-        }
+        },
+        stepSize: {
+            type: Number,
+            required: true,
+        },
     },
     data: function() {
-        return {
-            chart: null as null | Chart,
-        }
+        return {}
     },
     computed: {
-        totals: function(): number {
-            return this.data.reduce((total: number, model: ElementModel) => {
+        chartId: function(): string {
+            return `chart-${this.title.replaceAll(' ', '-')}`
+        },
+        totals: function(): string {
+            return this.inputData.reduce((total: number, model: ElementModel) => {
                 return total + model.value;
             }, 0).toFixed(2);
         },
+        chartColors: function() {
+            const safeLength = this.inputData.length > 0 ? this.inputData.length : this.stepSize;
+            const steps =  safeLength / this.stepSize;
+
+            return this.inputData.map((d: ElementModel, i: number) => {
+                const currentIndex = i + 1;
+                const hueSteps = (360 / steps) > 100 ? 100 : (360 / steps);
+                
+                const hue = hueSteps * Math.ceil(currentIndex / this.stepSize);
+                const lightness = 10 + ((80 /this.stepSize) * ((currentIndex % this.stepSize) + 1)); // we want this to be between 10 and 90
+
+                return `hsl(${hue}deg, 100%, ${lightness}%)`
+            })
+        },
         chartData: function() {
-            const labels = this.data.map(el => el.name);
-            const values = this.data.map(el => el.value);
+            const labels = this.inputData.map(el => el.name);
+            const values = this.inputData.map(el => el.value);
 
             return {
                 labels: labels,
                 datasets: [{
                     label: this.title,
-                    borderColor: 'rgb(255, 99, 132)',
+                    borderColor: this.chartColors,
+                    backgroundColor: this.chartColors,
                     data: values,
                 }]
             }
         },
     },
     watch: {
-        data: function() {
-            if (this.chart != null) {
-                this.chart.destroy();
+        inputData: function() {
+            const chart = Chart.getChart(this.chartId);
+            if (chart != null) {
+                chart.destroy();
+                this.showChart();
+            }
+        },
+        stepSize: function() {
+            const chart = Chart.getChart(this.chartId);
+            if (chart != null) {
+                chart.destroy();
                 this.showChart();
             }
         }
@@ -57,28 +85,28 @@ export default defineComponent({
     methods: {
         showChart: function() {
             const chartCanvas = this.$refs.chart as HTMLCanvasElement;
-            this.chart = new Chart(
+            const chart = new Chart(
                 chartCanvas,
                 {
                     type: 'doughnut',
                     data: this.chartData,
                     options: {}
                 }
-            ) as Chart;
-            console.log(this.chart);
-        },
+            );
+             console.log('new chart created!', chart);
+        }
     }
 })
 </script>
 
 <template>
-    <article class="w-full h-auto px-2 py-4 rounded-md border-2 border-solid border-pink-800 drop-shadow-lg  bg-gray-200">
+    <article class="w-full h-auto px-2 py-4 rounded-md border-2 border-solid border-gray-700 drop-shadow-lg  bg-white">
         <div>
             <header class="w-full flex flex-col mb-2">
                 <h1 class="flex mx-auto text-lg font-bold">{{ title }}</h1>
                 <h1 class="flex mx-auto text-3xl">total: {{ totals }}</h1>
             </header>
-            <canvas ref="chart" class="w-full"></canvas>
+            <canvas :id="chartId" ref="chart" class="w-full"></canvas>
         </div>
     </article>
 </template>

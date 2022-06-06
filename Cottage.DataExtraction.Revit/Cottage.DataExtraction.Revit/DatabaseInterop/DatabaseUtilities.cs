@@ -142,7 +142,7 @@ namespace Cottage.DataExtraction.Revit.DatabaseInterop
                         cmd.ExecuteNonQuery();
                     }
 
-                    foreach (ElementModel elementModel in databaseModel.Walls)
+                    foreach (ElementModel elementModel in databaseModel.Floors)
                     {
                         NpgsqlCommand cmd = new NpgsqlCommand($@"
                             INSERT INTO {floorTableName} (name, area) 
@@ -151,7 +151,7 @@ namespace Cottage.DataExtraction.Revit.DatabaseInterop
                         cmd.ExecuteNonQuery();
                     }
 
-                    foreach (ElementModel elementModel in databaseModel.Walls)
+                    foreach (ElementModel elementModel in databaseModel.PlumbingFixtures)
                     {
                         NpgsqlCommand cmd = new NpgsqlCommand($@"
                             INSERT INTO {plumbingFixtureTableName} (name, count) 
