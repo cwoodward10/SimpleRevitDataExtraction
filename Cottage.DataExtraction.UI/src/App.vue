@@ -36,24 +36,33 @@ export default defineComponent({
 </script>
 
 <template>
-  <header class="flex flex-col w-40 mx-auto my-3">
-    <div class="flex flex-col">
-      <label name="changeStep">Elements per Color</label>
-      <div class="flex space-x-2">
-        <input name="changeStep"
-                type="range"
-                min="1"
-                max="10"
-                value="stepSize"
-                @change="updateStepSize" />
-        <p>{{ stepSize }}</p>
+  <main class="flex flex-col space-y-4 mx-auto px-20 py-8">
+    <header class="flex flex-col w-40 mx-auto my-3">
+      <div class="flex flex-col">
+        <label name="changeStep">Elements per Color</label>
+        <div class="flex space-x-2">
+          <input name="changeStep"
+                  type="range"
+                  min="1"
+                  max="10"
+                  value="stepSize"
+                  @change="updateStepSize" />
+          <p>{{ stepSize }}</p>
+        </div>
       </div>
+    </header>
+
+    <div class="grid grid-cols-3 gap-4">
+      <DataViewer :title="'Walls'" :inputData="walls" :stepSize="stepSize" />
+      <DataViewer :title="'Floors'" :inputData="floors" :stepSize="stepSize" />
+      <DataViewer :title="'Plumbing Fixtures'" :inputData="plumbingFixtures" :stepSize="stepSize" />
     </div>
-    <button class="mx-auto w-16 border border-red-400 border-solid hover:bg-red-400 text-red-400 hover:text-white font-medium rounded hover:drop-shadow-lg" @click="resetData">Reset</button>
-  </header>
-  <main class="grid grid-cols-3 m-10 gap-4">
-    <DataViewer :title="'Walls'" :inputData="walls" :stepSize="stepSize" />
-    <DataViewer :title="'Floors'" :inputData="floors" :stepSize="stepSize" />
-    <DataViewer :title="'Plumbing Fixtures'" :inputData="plumbingFixtures" :stepSize="stepSize" />
+
+    <footer class="mx-auto">
+      <button class="mx-auto w-32 border border-red-400 border-solid hover:bg-red-400 text-red-400 hover:text-white font-medium rounded hover:drop-shadow-lg" 
+            @click="resetData">
+            Update Data
+    </button>
+    </footer>
   </main>
 </template>

@@ -103,8 +103,8 @@ export default defineComponent({
     <article class="w-full h-auto px-2 py-4 rounded-md border-2 border-solid border-gray-700 drop-shadow-lg  bg-white">
         <div>
             <header class="w-full flex flex-col mb-2">
-                <h1 class="flex mx-auto text-lg font-bold">{{ title }}</h1>
-                <h1 class="flex mx-auto text-3xl">total: {{ totals }}</h1>
+                <h1 class="max-w-full flex mx-auto text-3xl font-bold truncate">{{ title }}</h1>
+                <h1 class="flex mx-auto text-lg">total: {{ totals }}</h1>
             </header>
             <canvas :id="chartId" ref="chart" class="w-full"></canvas>
         </div>
